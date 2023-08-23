@@ -7,10 +7,21 @@ const App = () => {
     // [giá trị của biến, function xử lý khi biến có sự thay đổi ]
     let [name, setName] = useState("LiTi");
     let [address, setAddress] = useState(""); // Khởi tạo state giá trị rỗng
+    let [todos, setTodos] = useState([
+        { id: 111, title: "Playing soccer" },
+        { id: 222, title: "Watching youtube" },
+    ]);
 
     const handleEventClick = (event) => {
-        // set lại giá trị name
-        setName(address); // dùng hook để set lại giá trị // gọi đến là tự động re-ender
+        // validate input // check điều kiện input rỗng
+        if (!address) {
+            alert("missing requied param!");
+            return;
+        }
+        // hook not merge state vì vậy phải dùng ... (spread syntax)
+        let newTodo = { id: "123", title: address }; // tạo ra 1 mảng mới
+        setTodos([...todos, newTodo]); // dùng toán tử ... để lấy obj cũ, lấy thêm obj vừa nhập
+        setAddress(""); // set input thành rỗng
     };
 
     // hàm nhập
@@ -25,6 +36,17 @@ const App = () => {
             <header className="App-header">
                 <Nav />
                 <h1>Hello World {name}</h1>
+                <div className="todo-container">
+                    {/* kh dùng for với for-each vì nó sẽ thay đổi phần tử ở mảng cũ */}
+                    {/* Dùng vòng map để lập 1 mảng mới */}
+                    {todos.map((todo) => {
+                        return (
+                            <li className="todo-content" key={todo.id}>
+                                {todo.title}
+                            </li>
+                        );
+                    })}
+                </div>
                 <input
                     type="text"
                     value={address}
