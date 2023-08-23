@@ -1,6 +1,7 @@
 import "./App.scss";
 import Nav from "./views/Nav";
 import { useState } from "react"; //hook
+import Todo from "./views/Todo";
 
 const App = () => {
     // hàm useState trả ra array gồm 2 phần tử
@@ -36,17 +37,8 @@ const App = () => {
             <header className="App-header">
                 <Nav />
                 <h1>Hello World {name}</h1>
-                <div className="todo-container">
-                    {/* kh dùng for với for-each vì nó sẽ thay đổi phần tử ở mảng cũ */}
-                    {/* Dùng vòng map để lập 1 mảng mới */}
-                    {todos.map((todo) => {
-                        return (
-                            <li className="todo-content" key={todo.id}>
-                                {todo.title}
-                            </li>
-                        );
-                    })}
-                </div>
+                {/* truyền props */}
+                <Todo myData={todos} />
                 <input
                     type="text"
                     value={address}
