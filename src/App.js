@@ -1,7 +1,8 @@
 import "./App.scss";
 import Nav from "./views/Nav";
-import { useState } from "react"; //hook
+import { useState, useEffect } from "react"; //hook
 import Todo from "./views/Todo";
+import InfoUser from "./views/InfoUser";
 
 const App = () => {
     // hàm useState trả ra array gồm 2 phần tử
@@ -14,6 +15,10 @@ const App = () => {
         { id: 333, title: "Doing homework", type: "mini" },
         { id: 444, title: "Sleeping", type: "linhtiendev" },
     ]);
+
+    useEffect(() => {
+        console.log("use effect");
+    }, []);
 
     const handleEventClick = (event) => {
         // validate input // check điều kiện input rỗng
@@ -51,6 +56,7 @@ const App = () => {
             <header className="App-header">
                 <Nav />
                 <h1>Hello World {name}</h1>
+
                 {/* truyền props */}
                 <Todo
                     todos={todos}
@@ -78,6 +84,7 @@ const App = () => {
                     Click me
                 </button>
             </header>
+            <InfoUser />
         </div>
     );
 };

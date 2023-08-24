@@ -1,0 +1,27 @@
+.info-container {
+    margin: 0 90px;
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        color: white;
+        thead {
+            height: 70px;
+        }
+        tbody {
+            .user-avatar {
+                width: 40px;
+                border-radius: 50%;
+            }
+        }
+        td,
+        th {
+            border: 1px solid #e4d6d6;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #626d84;
+        }
+    }
+}
