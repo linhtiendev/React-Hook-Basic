@@ -22,7 +22,11 @@ const App = () => {
             return;
         }
         // hook not merge state vì vậy phải dùng ... (spread syntax)
-        let newTodo = { id: "123", title: address, type: "linhtiendev" }; // tạo ra 1 mảng mới
+        let newTodo = {
+            id: Math.floor(Math.random() * 10000 + 1),
+            title: address,
+            type: "linhtiendev",
+        }; // tạo ra 1 mảng mới
         setTodos([...todos, newTodo]); // dùng toán tử ... để lấy obj cũ, lấy thêm obj vừa nhập
         setAddress(""); // set input thành rỗng
     };
@@ -34,19 +38,33 @@ const App = () => {
         setAddress(event.target.value);
     };
 
+    // hàm xóa
+    const deleteDataTodo = (id) => {
+        // tạo biến mới để hứng todos
+        let currentTodo = todos;
+        currentTodo = currentTodo.filter((item) => item.id !== id);
+        setTodos(currentTodo);
+    };
+
     return (
         <div className="App">
             <header className="App-header">
                 <Nav />
                 <h1>Hello World {name}</h1>
                 {/* truyền props */}
-                <Todo myData={todos} title={"all todo"} />
+                <Todo
+                    todos={todos}
+                    title={"all todo"}
+                    // truyền props delete
+                    deleteDataTodo={deleteDataTodo}
+                />
                 {/* tai sd Todo */}
                 {/* Dùng hàm filter để lọc mảng có type là linhtiendev */}
                 {/* có input đầu vào là type */}
                 <Todo
-                    myData={todos.filter((item) => item.type === "linhtiendev")}
+                    todos={todos.filter((item) => item.type === "linhtiendev")}
                     title={`linhtiendev's todos`}
+                    deleteDataTodo={deleteDataTodo}
                 />
                 <input
                     type="text"
