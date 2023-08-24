@@ -7,6 +7,8 @@ const Todo = (props) => {
     const todos = props.myData;
     return (
         <div className="todo-container">
+            {/* Nhận props title */}
+            <div className="title">{props.title}</div>
             {/* kh dùng for với for-each vì nó sẽ thay đổi phần tử ở mảng cũ */}
             {/* Dùng vòng map để lập 1 mảng mới */}
             {todos.map((todo) => {
@@ -16,6 +18,7 @@ const Todo = (props) => {
                     </li>
                 );
             })}
+            <hr />
         </div>
     );
 };

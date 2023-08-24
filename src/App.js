@@ -9,8 +9,10 @@ const App = () => {
     let [name, setName] = useState("LiTi");
     let [address, setAddress] = useState(""); // Khởi tạo state giá trị rỗng
     let [todos, setTodos] = useState([
-        { id: 111, title: "Playing soccer" },
-        { id: 222, title: "Watching youtube" },
+        { id: 111, title: "Playing soccer", type: "linhtiendev" },
+        { id: 222, title: "Watching youtube", type: "linhtiendev" },
+        { id: 333, title: "Doing homework", type: "mini" },
+        { id: 444, title: "Sleeping", type: "linhtiendev" },
     ]);
 
     const handleEventClick = (event) => {
@@ -20,7 +22,7 @@ const App = () => {
             return;
         }
         // hook not merge state vì vậy phải dùng ... (spread syntax)
-        let newTodo = { id: "123", title: address }; // tạo ra 1 mảng mới
+        let newTodo = { id: "123", title: address, type: "linhtiendev" }; // tạo ra 1 mảng mới
         setTodos([...todos, newTodo]); // dùng toán tử ... để lấy obj cũ, lấy thêm obj vừa nhập
         setAddress(""); // set input thành rỗng
     };
@@ -38,7 +40,14 @@ const App = () => {
                 <Nav />
                 <h1>Hello World {name}</h1>
                 {/* truyền props */}
-                <Todo myData={todos} />
+                <Todo myData={todos} title={"all todo"} />
+                {/* tai sd Todo */}
+                {/* Dùng hàm filter để lọc mảng có type là linhtiendev */}
+                {/* có input đầu vào là type */}
+                <Todo
+                    myData={todos.filter((item) => item.type === "linhtiendev")}
+                    title={`linhtiendev's todos`}
+                />
                 <input
                     type="text"
                     value={address}
