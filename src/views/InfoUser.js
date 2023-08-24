@@ -1,33 +1,16 @@
 // #16
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useFetch from "../customize/Fetch"; // cpn custom xử lí logic
 
 import "./InfoUser.scss";
 
 const InfoCovid = () => {
-    // tạo state có array rỗng
-    const [dataUser, setDataUser] = useState([]);
-    // Biến kiểm tra trạng thái isLoading data
-    const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
-    // dùng useEffect để lấy data <=> componentDidMount
-    useEffect(async () => {
-        try {
-            let res = await axios.get("https://reqres.in/api/users?page=1");
-            // kiểm tra giá trị data, nếu không có sẽ in ra mảng rỗng
-            let data = res && res.data && res.data.data ? res.data.data : [];
-            // nếu có data sẽ set lại state
-            setDataUser(data);
-            // hàm sẽ chạy khi isLoading = false
-            setIsLoading(false);
-            // hàm kiểm tra lỗi
-            setIsError(false);
-        } catch (e) {
-            setIsLoading(false);
-            setIsError(true);
-        }
-        // truyền vào 1 mảng rỗng để hàm chỉ chạy một lần
-    }, []);
+    // hàm nhận lại các logic đã được xử lí từ Fetch
+    const {
+        data: dataUser,
+        isLoading,
+        isError,
+    } = useFetch("https://reqres.in/api/users?page=1");
 
     return (
         <div className="info-container">
