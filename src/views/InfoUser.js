@@ -7,19 +7,25 @@ import "./InfoUser.scss";
 const InfoCovid = () => {
     // tạo state có array rỗng
     const [dataUser, setDataUser] = useState([]);
-    // Biến kiểm tra trạng thái loading data
-    const [loading, setLoading] = useState(true);
+    // Biến kiểm tra trạng thái isLoading data
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
     // dùng useEffect để lấy data <=> componentDidMount
     useEffect(async () => {
-        setTimeout(async () => {
+        try {
             let res = await axios.get("https://reqres.in/api/users?page=1");
             // kiểm tra giá trị data, nếu không có sẽ in ra mảng rỗng
             let data = res && res.data && res.data.data ? res.data.data : [];
             // nếu có data sẽ set lại state
             setDataUser(data);
-            // hàm sẽ chạy khi loading = false
-            setLoading(false);
-        }, 3000);
+            // hàm sẽ chạy khi isLoading = false
+            setIsLoading(false);
+            // hàm kiểm tra lỗi
+            setIsError(false);
+        } catch (e) {
+            setIsLoading(false);
+            setIsError(true);
+        }
         // truyền vào 1 mảng rỗng để hàm chỉ chạy một lần
     }, []);
 
@@ -38,8 +44,9 @@ const InfoCovid = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* Nếu loading === false */}
-                    {loading === false &&
+                    {/* Nếu isLoading === false */}
+                    {isError === false &&
+                        isLoading === false &&
                         dataUser &&
                         dataUser.length > 0 &&
                         dataUser.map((item, index) => {
@@ -58,11 +65,18 @@ const InfoCovid = () => {
                                 </tr>
                             );
                         })}
-                    {/* nếu loading === true */}
-                    {loading === true && (
+                    {/* nếu isLoading === true */}
+                    {isLoading === true && (
                         <tr>
                             <td colSpan="5" style={{ textAlign: "center" }}>
-                                Loading data...
+                                isLoading data...
+                            </td>
+                        </tr>
+                    )}
+                    {isError === true && (
+                        <tr>
+                            <td colSpan="5" style={{ textAlign: "center" }}>
+                                Something went wrong...
                             </td>
                         </tr>
                     )}
