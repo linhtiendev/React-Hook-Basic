@@ -12,7 +12,10 @@ const Nav = () => {
                     CountDown
                 </NavLink>
                 <NavLink to="/todo" activeClassName="active">
-                    Todo
+                    Todo App
+                </NavLink>
+                <NavLink to="/blog" activeClassName="active">
+                    Blog App
                 </NavLink>
             </span>
         </>

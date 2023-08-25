@@ -1,0 +1,31 @@
+.blog__container {
+    margin: 20px auto;
+    .blog--content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        .blog--item {
+            border-radius: 4px;
+            padding: 10px;
+            // margin: 0 10px;
+            border: 1px solid rgb(189, 182, 182);
+            max-width: 450px;
+            text-align: left !important;
+            .title {
+                font-size: 28px;
+                font-weight: 700;
+                margin: 15px 0;
+            }
+            .btn-view-detail {
+                margin-top: 10px;
+                border: none;
+                width: 100px;
+                height: 30px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+        }
+    }
+}

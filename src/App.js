@@ -2,6 +2,8 @@ import "./App.scss";
 import Nav from "./views/Nav";
 import { useState, useEffect } from "react"; //hook
 import Todo from "./views/Todo";
+import Blog from "./views/Blog";
+import DetailBlog from "./views/DetailBlog";
 import InfoUser from "./views/InfoUser";
 import { CountDown, NewCountDown } from "./views/CountDown";
 
@@ -25,7 +27,7 @@ const App = () => {
     ]);
 
     useEffect(() => {
-        console.log("use effect");
+        // console.log("use effect");
     }, []);
 
     const handleEventClick = (event) => {
@@ -106,6 +108,14 @@ const App = () => {
                             >
                                 Click me
                             </button>
+                        </Route>
+                        {/* thêm exact để trỏ chính xác params */}
+                        <Route path="/blog" exact>
+                            <Blog />
+                        </Route>
+                        {/* dùng dấu : để lấy được tham số */}
+                        <Route path="/blog/:id">
+                            <DetailBlog />
                         </Route>
                     </Switch>
                 </header>

@@ -16,7 +16,6 @@ const InfoCovid = () => {
         <div className="info-container">
             <h2>Table Users</h2>
             <table>
-                {console.log("check data", dataUser)}
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -52,7 +51,7 @@ const InfoCovid = () => {
                     {isLoading === true && (
                         <tr>
                             <td colSpan="5" style={{ textAlign: "center" }}>
-                                isLoading data...
+                                Loading data...
                             </td>
                         </tr>
                     )}
