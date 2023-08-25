@@ -26,7 +26,7 @@ const useFetch = (url) => {
             setIsError(true);
         }
         // truyền vào 1 mảng rỗng để hàm chỉ chạy một lần
-    }, []);
+    }, [url]);
     return { data, isLoading, isError };
 };
 export default useFetch;

@@ -3,6 +3,7 @@ import Nav from "./views/Nav";
 import { useState, useEffect } from "react"; //hook
 import Todo from "./views/Todo";
 import InfoUser from "./views/InfoUser";
+import { CountDown, NewCountDown } from "./views/CountDown";
 
 const App = () => {
     // hàm useState trả ra array gồm 2 phần tử
@@ -51,10 +52,17 @@ const App = () => {
         setTodos(currentTodo);
     };
 
+    const onTimesUp = () => {
+        alert("times up!");
+    };
+
     return (
         <div className="App">
             <header className="App-header">
                 <Nav />
+                <CountDown onTimesUp={onTimesUp} />
+                <span>---------------------</span>
+                <NewCountDown onTimesUp={onTimesUp} />
                 <h1>Hello World {name}</h1>
 
                 {/* truyền props */}
