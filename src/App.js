@@ -5,6 +5,13 @@ import Todo from "./views/Todo";
 import InfoUser from "./views/InfoUser";
 import { CountDown, NewCountDown } from "./views/CountDown";
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Routes,
+    Route,
+} from "react-router-dom";
+
 const App = () => {
     // hàm useState trả ra array gồm 2 phần tử
     // [giá trị của biến, function xử lý khi biến có sự thay đổi ]
@@ -57,43 +64,53 @@ const App = () => {
     };
 
     return (
-        <div className="App">
-            <header className="App-header">
-                <Nav />
-                <CountDown onTimesUp={onTimesUp} />
-                <span>---------------------</span>
-                <NewCountDown onTimesUp={onTimesUp} />
-                <h1>Hello World {name}</h1>
-
-                {/* truyền props */}
-                <Todo
-                    todos={todos}
-                    title={"all todo"}
-                    // truyền props delete
-                    deleteDataTodo={deleteDataTodo}
-                />
-                {/* tai sd Todo */}
-                {/* Dùng hàm filter để lọc mảng có type là linhtiendev */}
-                {/* có input đầu vào là type */}
-                <Todo
-                    todos={todos.filter((item) => item.type === "linhtiendev")}
-                    title={`linhtiendev's todos`}
-                    deleteDataTodo={deleteDataTodo}
-                />
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(event) => handleOnchangeInput(event)}
-                />
-                <button
-                    type="button"
-                    onClick={(event) => handleEventClick(event)}
-                >
-                    Click me
-                </button>
-            </header>
-            <InfoUser />
-        </div>
+        <Router>
+            <div className="App">
+                <header className="App-header">
+                    <Nav />
+                    <Switch>
+                        <Route exact path="/">
+                            <InfoUser />
+                        </Route>
+                        <Route path="/countdown">
+                            <CountDown onTimesUp={onTimesUp} />
+                            <span>---------------------</span>
+                            <NewCountDown onTimesUp={onTimesUp} />
+                        </Route>
+                        <Route path="/todo">
+                            {/* truyền props */}
+                            <Todo
+                                todos={todos}
+                                title={"all todo"}
+                                // truyền props delete
+                                deleteDataTodo={deleteDataTodo}
+                            />
+                            {/* tai sd Todo */}
+                            {/* Dùng hàm filter để lọc mảng có type là linhtiendev */}
+                            {/* có input đầu vào là type */}
+                            <Todo
+                                todos={todos.filter(
+                                    (item) => item.type === "linhtiendev"
+                                )}
+                                title={`linhtiendev's todos`}
+                                deleteDataTodo={deleteDataTodo}
+                            />
+                            <input
+                                type="text"
+                                value={address}
+                                onChange={(event) => handleOnchangeInput(event)}
+                            />
+                            <button
+                                type="button"
+                                onClick={(event) => handleEventClick(event)}
+                            >
+                                Click me
+                            </button>
+                        </Route>
+                    </Switch>
+                </header>
+            </div>
+        </Router>
     );
 };
 
