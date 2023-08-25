@@ -7,9 +7,15 @@ const useFetch = (url) => {
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
+        // use cancel token
+        // dùng khi click quá nhiều, lọc khi không lấy token đó
+        const ourRequest = axios.CancelToken.source(); // step 1
+
         try {
             async function fetchData() {
-                let res = await axios.get(url);
+                let res = await axios.get(url, {
+                    cancelToken: ourRequest.token, // step 2
+                });
                 // kiểm tra giá trị data, nếu không có sẽ in ra mảng rỗng
                 let data =
                     res && res.data && res.data.data ? res.data.data : [];
@@ -25,6 +31,10 @@ const useFetch = (url) => {
             setIsLoading(false);
             setIsError(true);
         }
+
+        return () => {
+            ourRequest.cancel(); // step 3
+        };
         // truyền vào 1 mảng rỗng để hàm chỉ chạy một lần
     }, [url]);
     return { data, isLoading, isError };
