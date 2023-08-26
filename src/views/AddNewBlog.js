@@ -6,7 +6,17 @@ const AddNewBlog = () => {
     const [content, setContent] = useState("");
 
     const handleSubmitButton = () => {
-        console.log("click me: ", title, content);
+        // if (title === "" || title === undefined || title === null) alert("empty title");
+        // <=>
+        if (!title) {
+            alert("empty title");
+            return;
+        }
+        if (!content) {
+            alert("empty content");
+            return;
+        }
+        console.log("success");
     };
     return (
         <div className="add-new-container">
