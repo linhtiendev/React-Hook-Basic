@@ -4,6 +4,7 @@
     border: solid 1px gray;
     .text-add-new {
         margin: 15px 0;
+        text-align: center;
     }
     .inputs-data {
         text-align: left;
@@ -12,15 +13,16 @@
         display: flex;
         flex-direction: column;
         input {
+            padding: 15px;
             height: 24px;
             border-radius: 3px;
-            border: none;
+            // border: none;
         }
     }
     .btn-submit {
         border-radius: 4px;
         cursor: pointer;
-        border: none;
+        // border: none;
         padding: 5px 15px;
         margin: 15px;
     }

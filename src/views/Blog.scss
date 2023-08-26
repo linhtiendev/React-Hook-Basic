@@ -25,19 +25,31 @@
             // margin: 0 10px;
             border: 1px solid rgb(189, 182, 182);
             max-width: 450px;
+            min-width: 450px;
             text-align: left !important;
             .title {
                 font-size: 28px;
                 font-weight: 700;
                 margin: 15px 0;
+
+                position: relative;
+                .btn--delelte {
+                    position: absolute;
+                    right: 15px;
+                    font-size: 17px;
+                    border: 1px solid rgb(221, 206, 206);
+                    border-radius: 50%;
+                    width: 30px;
+                    cursor: pointer;
+                    span {
+                        margin-left: 9px;
+                    }
+                }
             }
-            .btn-view-detail {
-                margin-top: 10px;
-                border: none;
-                width: 100px;
-                height: 30px;
-                cursor: pointer;
+            .view-detail {
+                font-size: 20px;
                 border-radius: 5px;
+                margin: 20px 0;
             }
         }
     }

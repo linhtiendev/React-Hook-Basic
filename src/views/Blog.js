@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import AddNewBlog from "./AddNewBlog";
 
 import "./Blog.scss";
 
@@ -9,12 +13,13 @@ const Blog = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
-    let history = useHistory();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         // fix lỗi nhận request
         const ourRequest = axios.CancelToken.source(); // step 1
-
         try {
             async function fetchData() {
                 let res = await axios.get(
@@ -36,27 +41,38 @@ const Blog = () => {
             setIsLoading(false);
             setIsError(true);
         }
-
         return () => {
             ourRequest.cancel(); // step 3
         };
     }, []);
 
-    const handleAddNewBlog = () => {
-        history.push("/add-new-blog");
+    const handleAddNewBlog = (blog) => {
+        let data = dataBlog;
+        data.unshift(blog); // unshift = lấy item cuối lên đầu
+        setShow(false); // tắt show modal
+        setDataBlog(data); // set lại data vừa nhập ở modal
     };
 
+    // Hàm delete a blog
+    const handleDeleteAPost = (id) => {
+        let data = dataBlog;
+        data = data.filter((item) => item.id !== id);
+        setDataBlog(data);
+    };
     return (
         <>
-            <div className="btn__container">
-                <button
-                    className="btn__add--new"
-                    type="button"
-                    onClick={() => handleAddNewBlog()}
-                >
-                    + Add new blog
-                </button>
-            </div>
+            <Button variant="primary" className="mt-5" onClick={handleShow}>
+                + Add new blog
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add New Blog</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <AddNewBlog handleAddNewBlog={handleAddNewBlog} />
+                </Modal.Body>
+            </Modal>
+
             <div className="blog__container">
                 <div className="blog--content">
                     {isError === false &&
@@ -67,13 +83,21 @@ const Blog = () => {
                             return (
                                 <div className="blog--item" key={item.id}>
                                     <div className="title">
+                                        <div
+                                            className="btn--delelte"
+                                            onClick={() =>
+                                                handleDeleteAPost(item.id)
+                                            }
+                                        >
+                                            <span>x</span>
+                                        </div>
                                         <span>{index + 1}.</span> &nbsp;
                                         {item.title}
                                     </div>
                                     <div>{item.body}</div>
                                     <button
                                         type="button"
-                                        className="btn-view-detail"
+                                        className="view-detail"
                                     >
                                         <Link to={`/blog/${item.id}`}>
                                             View detail
