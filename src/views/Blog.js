@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import "./Blog.scss";
 
@@ -8,6 +8,8 @@ const Blog = () => {
     const [dataBlog, setDataBlog] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+
+    let history = useHistory();
 
     useEffect(() => {
         // fix lỗi nhận request
@@ -25,8 +27,6 @@ const Blog = () => {
                 let data = res && res.data ? res.data : [];
                 // lấy 10 data
                 newData = data.slice(0, 9);
-                console.log(newData);
-
                 setDataBlog(newData);
                 setIsLoading(false);
                 setIsError(false);
@@ -42,8 +42,21 @@ const Blog = () => {
         };
     }, []);
 
+    const handleAddNewBlog = () => {
+        history.push("/add-new-blog");
+    };
+
     return (
         <>
+            <div className="btn__container">
+                <button
+                    className="btn__add--new"
+                    type="button"
+                    onClick={() => handleAddNewBlog()}
+                >
+                    + Add new blog
+                </button>
+            </div>
             <div className="blog__container">
                 <div className="blog--content">
                     {isError === false &&

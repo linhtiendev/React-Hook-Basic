@@ -1,5 +1,4 @@
 // #16
-import { useEffect, useState } from "react";
 import useFetch from "../customize/Fetch"; // cpn custom xử lí logic
 
 import "./InfoUser.scss";

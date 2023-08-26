@@ -1,0 +1,27 @@
+.add-new-container {
+    margin: 30px auto;
+    width: 400px !important;
+    border: solid 1px gray;
+    .text-add-new {
+        margin: 15px 0;
+    }
+    .inputs-data {
+        text-align: left;
+        padding: 5px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        input {
+            height: 24px;
+            border-radius: 3px;
+            border: none;
+        }
+    }
+    .btn-submit {
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        padding: 5px 15px;
+        margin: 15px;
+    }
+}

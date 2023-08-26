@@ -27,8 +27,6 @@ const DetailBlog = () => {
                     }
                 );
                 let data = res && res.data ? res.data : [];
-                console.log(data);
-
                 setDataDetailBlog(data);
                 setIsLoading(false);
                 setIsError(false);
