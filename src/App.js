@@ -6,6 +6,7 @@ import Blog from "./views/Blog";
 import DetailBlog from "./views/DetailBlog";
 import InfoUser from "./views/InfoUser";
 import AddNewBlog from "./views/AddNewBlog";
+import NotFoundPage from "./views/NotFoundPage";
 
 import { CountDown, NewCountDown } from "./views/CountDown";
 
@@ -121,6 +122,9 @@ const App = () => {
                         </Route>
                         <Route path="/add-new-blog">
                             <AddNewBlog />
+                        </Route>
+                        <Route path="*">
+                            <NotFoundPage />
                         </Route>
                     </Switch>
                 </header>

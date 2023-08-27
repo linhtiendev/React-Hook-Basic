@@ -82,15 +82,15 @@ const Blog = () => {
                         dataBlog.map((item, index) => {
                             return (
                                 <div className="blog--item" key={item.id}>
+                                    <div
+                                        className="btn--delelte"
+                                        onClick={() =>
+                                            handleDeleteAPost(item.id)
+                                        }
+                                    >
+                                        <span>X</span>
+                                    </div>
                                     <div className="title">
-                                        <div
-                                            className="btn--delelte"
-                                            onClick={() =>
-                                                handleDeleteAPost(item.id)
-                                            }
-                                        >
-                                            <span>x</span>
-                                        </div>
                                         <span>{index + 1}.</span> &nbsp;
                                         {item.title}
                                     </div>
